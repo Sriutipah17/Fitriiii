@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Anniversary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f3d9ff, #ffd1e6);
+      overflow-x: hidden;
+      padding-bottom: 150px;
+      position: relative;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+      background-attachment: fixed;
+      opacity: 0;
+      animation: pageFadeIn 2s ease-out forwards;
+    }
+
+    .parallax {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15), rgba(161, 0, 255, 0.05));
+      z-index: -1;
+      transform: translateY(0);
+    }
+
+    .parallax-flower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M25 10c-8.284 0-15 6.716-15 15s6.716 15 15 15 15-6.716 15-15-6.716-15-15-15zm0 5c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z' fill='%23ff8ecf' fill-opacity='0.2'/%3E%3C/svg%3E");
+      opacity: 0.3;
+      z-index: -1;
+      transform: translateY(0);
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4.5em;
+      color: #a100ff;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1), 0 0 10px rgba(161, 0, 255, 0.5);
+      background: linear-gradient(to bottom right, #ffb3d9, #e5c1ff);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      animation: typing 3s steps(40, end) forwards;
+    }
+
+    header p {
+      font-size: 1.3em;
+      color: #4a4a4a;
+      margin: 20px auto;
+      max-width: 750px;
+      line-height: 1.7;
+      background: linear-gradient(to bottom right, #ffb3d9, #e5c1ff);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards;
+      position: relative;
+    }
+
+    header p::before {
+      content: '✿';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1.5em;
+      color: #ff8ecf;
+      opacity: 0.5;
+    }
+
+    header p::after {
+      content: '✿';
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 1.5em;
+      color: #ff8ecf;
+      opacity: 0.5;
+    }
+
+    header p:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    header p:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .divider {
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, #ff8ecf, #a100ff);
+      margin: 30px auto;
+      border-radius: 2px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .gallery-container {
+      max-width: 1040px;
+      margin: auto;
+      padding: 20px;
+      background: linear-gradient(to right, #ff8ecf, #a100ff);
+      border-radius: 25px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      transition: background 0.5s ease;
+    }
+
+    .gallery-container:hover {
+      background: linear-gradient(to right, #a100ff, #ff8ecf);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      border-radius: 20px;
+    }
+
+    .gallery figure {
+      position: relative;
+      margin: 0;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      object-fit: cover;
+      height: 200px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards;
+      animation-delay: calc(0.1s * var(--index));
+      position: relative;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 15px rgba(161, 0, 255, 0.5);
+      filter: brightness(1.1);
+    }
+
+    .gallery figcaption {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px;
+      border-radius: 0 0 20px 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9em;
+    }
+
+    .gallery figure:hover figcaption {
+      opacity: 1;
+    }
+
+    .gallery img::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(161, 0, 255, 0.2));
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .dedication {
+      text-align: center;
+      padding: 30px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5em;
+      color: #a100ff;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), 0 0 15px rgba(161, 0, 255, 0.7);
+      background: linear-gradient(to bottom right, #ffb3d9, #e5c1ff);
+      max-width: 600px;
+      margin: 20px auto;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+      opacity: 0;
+      animation: handwriting 4s ease-out forwards, glow 2s ease-in-out infinite;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .dedication-extra {
+      text-align: center;
+      padding: 30px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 4em;
+      color: #ff8ecf;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 142, 207, 0.8);
+      background: linear-gradient(to bottom right, #e5c1ff, #ffb3d9);
+      max-width: 650px;
+      margin: 20px auto;
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      position: relative;
+      opacity: 0;
+      animation: handwriting 4s ease-out 0.5s forwards, glow 2s ease-in-out infinite;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .special-dedication {
+      display: none;
+      text-align: center;
+      padding: 35px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 4.5em;
+      color: #c8a2c8;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), 0 0 25px rgba(200, 162, 200, 0.9);
+      background: linear-gradient(to bottom right, rgba(255, 230, 242, 0.8), rgba(243, 217, 255, 0.8));
+      max-width: 700px;
+      margin: 20px auto;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards, handwriting 5s ease-out forwards;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .dedication::before, .dedication-extra::before, .special-dedication::before {
+      content: '🌺';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      font-size: 2em;
+      color: #ff8ecf;
+      opacity: 0.6;
+    }
+
+    .dedication::after, .dedication-extra::after, .special-dedication::after {
+      content: '🌺';
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      font-size: 2em;
+      color: #ff8ecf;
+      opacity: 0.6;
+    }
+
+    .dedication:hover, .dedication-extra:hover, .special-dedication:hover {
+      transform: scale(1.05);
+      color: #ff6b6b;
+    }
+
+    .message-button {
+      text-align: center;
+      margin: 20px auto;
+    }
+
+    .message-button button {
+      background: linear-gradient(to right, #ff8ecf, #a100ff);
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .message-button button:hover {
+      transform: scale(1.1);
+    }
+
+    .extra-message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2em;
+      color: #4a4a4a;
+      background: linear-gradient(to bottom right, #ffb3d9, #e5c1ff);
+      max-width: 750px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .flowers {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .flowers span {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff8ecf'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z'/%3E%3C/svg%3E");
+      opacity: 0.6;
+      animation: float 10s linear infinite;
+    }
+
+    .click-flower {
+      animation: clickFloat 2s ease-out forwards;
+    }
+
+    .confetti {
+      position: fixed;
+      width: 15px;
+      height: 15px;
+      background: #ff8ecf;
+      opacity: 0.8;
+      animation: confettiFall 3s ease-out forwards;
+    }
+
+    .confetti.heart {
+      width: 20px;
+      height: 20px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(1) rotate(0deg);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.3) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes clickFloat {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-200px) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes glow {
+      0%, 100% { text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), 0 0 15px rgba(161, 0, 255, 0.7); }
+      50% { text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), 0 0 20px rgba(161, 0, 255, 0.9); }
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes handwriting {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .audio-controls {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2;
+    }
+
+    .audio-controls button {
+      background: linear-gradient(to right, #ff8ecf, #a100ff);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      margin-left: 10px;
+    }
+
+    .audio-controls button:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="parallax"></div>
+  <div class="parallax-flower"></div>
+
+  <header>
+    <h1><span class="typewriter">Happy 5th Anniversary</span></h1>
+    <p>
+      Hari ini bukan hanya tentang bertambahnya waktu kita bersama, tapi tentang betapa berharganya setiap detik yang aku habiskan denganmu. Terima kasih telah menjadi rumah terindah untuk hatiku, tempat aku selalu ingin kembali, tempat cinta tumbuh tanpa henti. Selamanya terasa terlalu singkat, jika itu bersamamu.
+    </p>
+    <p>
+      Aku tidak tahu bagaimana akhir cerita kita, apakah kamu akan tetap jadi tempatku pulang, atau hanya singgah sebentar untuk mengajarkanku tentang cinta. Tapi apapun takdirnya nanti, Yang pasti, hari ini, kamu masih orang yang aku syukuri setiap detiknya dan menjadi alasan senyumku yang paling tulus.💕
+    </p>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="gallery-container">
+    <div class="gallery">
+      <figure>
+        <img src="images/lebaaran.jpg" alt="Foto Kenangan 1" style="--index: 1">
+        <figcaption>Kenangan Lebaran Bersama</figcaption>
+      </figure>
+      <figure>
+        <img src="images/lebaran .jpg" alt="Foto Kenangan 2" style="--index: 2">
+        <figcaption>Momen Lebaran Penuh Cinta</figcaption>
+      </figure>
+      <figure>
+        <img src="images/ultah.jpg" alt="Foto Kenangan 3" style="--index: 3">
+        <figcaption>Perayaan Ulang Tahun</figcaption>
+      </figure>
+      <figure>
+        <img src="images/WhatsApp Image 2025-07-23 at 17.11.53_8ea16440.jpg" alt="Foto Kenangan 4" style="--index: 4">
+        <figcaption>Senyum Kita Bersama</figcaption>
+      </figure>
+      <figure>
+        <img src="images/WhatsApp Image .jpg" alt="Foto Kenangan 5" style="--index: 5">
+        <figcaption>Hari Bahagia</figcaption>
+      </figure>
+      <figure>
+        <img src="images/fit.jpg" alt="Foto Kenangan 6" style="--index: 6">
+        <figcaption>Kita Selalu Kompak</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="dedication"><span class="typewriter">For Sri Utipah Aulani</span></div>
+  <div class="dedication-extra"><span class="typewriter">For Sri Utipah Aulani</span></div>
+
+  <div class="message-button">
+    <button id="showMessage">Pesan Spesial</button>
+  </div>
+
+  <div class="extra-message" id="extraMessage">
+    I LOVE YOU💖
+  </div>
+  <div class="special-dedication" id="specialDedication">
+    <span class="typewriter">For Sri Utipah Aulani</span>
+  </div>
+
+  <div class="flowers" id="flowers"></div>
+
+  <div class="audio-controls">
+    <button id="playAudio">Putar Musik</button>
+    <button id="pauseAudio" style="display: none;">Jeda Musik</button>
+  </div>
+
+  <audio id="backgroundMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sweet.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const flowers = document.getElementById('flowers');
+    const colors = ['#ff8ecf', '#ff6b6b', '#ffb3d9', '#a100ff'];
+    for (let i = 0; i < 80; i++) {
+      const span = document.createElement('span');
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.top = Math.random() * 100 + 'vh';
+      span.style.animationDuration = (4 + Math.random() * 8) + 's';
+      span.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      span.style.transform = `scale(${0.4 + Math.random() * 0.6})`;
+      flowers.appendChild(span);
+    }
+
+    document.addEventListener('click', (e) => {
+      const span = document.createElement('span');
+      span.className = 'click-flower';
+      span.style.left = e.clientX + 'px';
+      span.style.top = e.clientY + 'px';
+      span.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      span.style.transform = `scale(${0.5 + Math.random() * 0.5})`;
+      flowers.appendChild(span);
+      setTimeout(() => span.remove(), 2000);
+    });
+
+    window.addEventListener('scroll', () => {
+      const parallax = document.querySelector('.parallax');
+      const parallaxFlower = document.querySelector('.parallax-flower');
+      parallax.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+      parallaxFlower.style.transform = `translateY(${window.scrollY * 0.1}px)`;
+    });
+
+    const audio = document.getElementById('backgroundMusic');
+    const playButton = document.getElementById('playAudio');
+    const pauseButton = document.getElementById('pauseAudio');
+
+    playButton.addEventListener('click', () => {
+      audio.play();
+      playButton.style.display = 'none';
+      pauseButton.style.display = 'inline-block';
+    });
+
+    pauseButton.addEventListener('click', () => {
+      audio.pause();
+      playButton.style.display = 'inline-block';
+      pauseButton.style.display = 'none';
+    });
+
+    const messageButton = document.getElementById('showMessage');
+    const extraMessage = document.getElementById('extraMessage');
+    const specialDedication = document.getElementById('specialDedication');
+    messageButton.addEventListener('click', () => {
+      extraMessage.style.display = 'block';
+      specialDedication.style.display = 'block';
+      for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = `confetti ${Math.random() > 0.5 ? 'heart' : ''}`;
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = Math.random() * 100 + 'vh';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 0.5 + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    });
+  </script>
+</body>
+</html>
